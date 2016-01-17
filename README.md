@@ -20,10 +20,13 @@ The base configuration that the container uses can be found on this repo as well
 
 1. Create a docker network:
 
+	```
 	docker network create --driver bridge voice_nw
+	```
 
 2. Run Freeswitch:
 
+	```
 	docker run \
 		--name=freeswitch \
 		--net=voice_nw \
@@ -35,16 +38,20 @@ The base configuration that the container uses can be found on this repo as well
 		-p 7443:7443/tcp \
 		-p 60535-65535:60535-65535/udp \
 		-v "$(pwd)/conf:/usr/local/freeswitch/conf" bettervoice/freeswitch-container:1.6.5
+	```
 
 3. Run Redis:
 
+	```
 	docker run -d \
 		--name=redis \
 		--net=voice_nw \
 		redis:2.8.23
+	```
 
 4. Finally, run Plivo:
 
+	```
 	docker run \
 		--name=plivoframework \
 		--net=voice_nw \
@@ -52,3 +59,4 @@ The base configuration that the container uses can be found on this repo as well
 		-p 8088:8088 \
 		-p 8089:8089 \
 		marconi/plivoframework:0.1.0
+	```
